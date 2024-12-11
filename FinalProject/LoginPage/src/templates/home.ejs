@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> HOME PAGE </title>
+
+</head>
+<body id = "body">
+   <h2> Welcome To Your Home Page <%- username %></h2>
+   Input City: <input type="text" id="city" placeholder="College Park" required>
+   <button onclick="main()";>Get Weather Info</button>
+   <div id="display">
+
+   </div>
+   <script>
+         
+         async function weather() {
+            const apiKey = '50f1f5dbdc1e4915805d8967b9c8980b';
+            const cityName = document.querySelector('#city').value;  // City name for which you want weather data
+
+      // Construct the URL for the GET request using the city name
+            const url = `https://api.weatherbit.io/v2.0/current?&city=${cityName}&key=${apiKey}`;
+            const result = await fetch(url);
+            const json = await result.json();
+
+            return json; /* The result will be wrapped in a promise */
+         }
+
+         async function main() {
+         try {
+            const data = await weather(); /* remove await and see what is printed */
+            const cityName = data.data[0].city_name;
+            const temperature = data.data[0].temp;
+            const weatherDescription = data.data[0].weather.description;
+            const humidity = data.data[0].rh;
+            const windSpeed = data.data[0].wind_spd;
+            document.querySelector('#display').innerHTML= `<h2>Weather in ${data.data[0].city_name}</h2>
+                            <p><strong>Temperature:</strong> ${data.data[0].temp}°C</p>
+                            <p><strong>Weather:</strong> ${data.data[0].weather.description}</p>
+                            <p><strong>Humidity:</strong> ${data.data[0].rh}%</p>
+                            <p><strong>Wind Speed:</strong> ${data.data[0].wind_spd} m/s</p>`;
+         } catch (e) { /* To see catch action, rename URL to invalid name */
+            console.log("\n***** ERROR Retrieving EnglishSpanish *****\n" + e);
+         }
+         }
+        
+      
+      
+   </script>
+</body>
+</html>
+
+
+<!-- if(cityName){
+   fetch(url)
+              .then(response => {
+                  if (response.ok) {
+                      return response.json();  // Parse the JSON response if the request is successful
+                  } else {
+                      throw new Error('City not found or request failed.');
+                  }
+              })
+              .then(data => {
+                  // Display weather data on the page
+                  const weatherDiv = document.getElementById('display');
+                  weatherDiv.innerHTML = `
+                      <h2>Weather in ${data.data[0].city_name}</h2>
+                      <p><strong>Temperature:</strong> ${data.data[0].temp}°C</p>
+                      <p><strong>Weather:</strong> ${data.data[0].weather.description}</p>
+                      <p><strong>Humidity:</strong> ${data.data[0].rh}%</p>
+                      
+                  `;
+              })
+              .catch(error => {
+                  // Handle errors (e.g., city not found, network issues)
+                  const weatherDiv = document.getElementById('display');
+                  weatherDiv.innerHTML = `<p>Error: ${error.message}</p>`;
+              });
+      } else {
+          alert("Please enter a city name.");
+      } -->

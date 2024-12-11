@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Place link to css files  -->
+
+<link rel="stylesheet" href="/style.css">
+
+<title>Sign Page</title>
+</head>
+
+
+<body id = "body">
+
+  <!-- Create a from that will allow user to enter thier Name and Password  -->
+
+  
+  <div class="form-info">
+  <form action="signup" method="post">
+
+
+      <h2> SignUp </h2>
+      <div class="login-info">
+      <strong> Username :</strong> <input type="text" name="username" id="username" required placeholder="Enter your name"  autocomplete="off"> <br><br>
+
+      </div>
+    
+      <div class="login-info">
+      <strong> Passoword :</strong> <input type="password" name="password" id="password" required placeholder="password"> <br><br>
+       <!-- Will redirect user to the sign up page if they are a new user  -->
+
+      <button id="submit-btn" type="submit"> Signup </button><br><br>
+      </div>
+      <p> already have an account?<a href="/login"> Login </a> </p>
+  </form>
+ 
+  </div>
+
+
+
+
+</body>
+</html>
